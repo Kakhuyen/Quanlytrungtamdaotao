@@ -1,43 +1,70 @@
-.gradle
+# ========================
+
+# BUILD / GRADLE
+
+# ========================
+
+.gradle/
 build/
+
+# giữ lại gradle wrapper (quan trọng)
+
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-.kotlin
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# ========================
+
+# JAVA
+
+# ========================
+
+*.class
+*.log
+
+# ========================
+
+# INTELLIJ IDEA
+
+# ========================
+
+.idea/
 *.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
+# ========================
+
+# ECLIPSE
+
+# ========================
+
 .project
-.settings
-.springBeans
-.sts4-cache
+.classpath
+.settings/
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# ========================
 
-### VS Code ###
+# NETBEANS
+
+# ========================
+
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# ========================
+
+# VS CODE
+
+# ========================
+
 .vscode/
 
-### Mac OS ###
+# ========================
+
+# OS FILES
+
+# ========================
+
 .DS_Store
+Thumbs.db
