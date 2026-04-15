@@ -2,6 +2,7 @@ package dao;
 import util.DBConnection;
 import java.sql.*;
 import java.util.*;
+import model.LopHoc;
 public class LopHocDAO {
     public List<LopHoc> getAll() {
         List<LopHoc> list = new ArrayList<>();
