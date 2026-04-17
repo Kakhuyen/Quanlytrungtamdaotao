@@ -72,3 +72,8 @@ SELECT l.maLH, l.tenLH, l.siSoMax, l.ngayKhaiGiang, k.tenKH, t.tenTT
 FROM LOPHOC l
 JOIN KHOAHOC k ON l.maKH = k.maKH
 JOIN TRUNGTAM t ON l.maTT = t.maTT;
+ALTER TABLE PHIEUDANGKY
+    ADD hoTen VARCHAR(100),
+ADD email VARCHAR(100),
+ADD SDT VARCHAR(10),
+ADD diaChi VARCHAR(200);

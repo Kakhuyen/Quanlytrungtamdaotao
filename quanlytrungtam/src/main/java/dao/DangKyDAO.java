@@ -3,7 +3,7 @@ import util.DBConnection;
 import java.sql.*;
 public class DangKyDAO {
     public boolean isDangKy(int maND, int maLH) {
-        String sql = "SELECT * FROM PHIEUDANGKY WHERE maND=? AND maLH=?";
+        String sql = "SELECT 1 FROM PHIEUDANGKY WHERE maND=? AND maLH=?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -12,48 +12,74 @@ public class DangKyDAO {
             ResultSet rs = ps.executeQuery();
             return rs.next();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
     public boolean isFull(int maLH) {
-        String sql = "SELECT COUNT(*) FROM PHIEUDANGKY WHERE maLH=?";
+        String sql = "SELECT COUNT(*) AS soLuong, l.siSoMax " +
+                "FROM PHIEUDANGKY p " +
+                "JOIN LOPHOC l ON p.maLH = l.maLH " +
+                "WHERE p.maLH=? AND p.tinhTrangDuyet='DaDuyet'";
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maLH);
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
-                int count = rs.getInt(1);
-
-                String sql2 = "SELECT siSoMax FROM LOPHOC WHERE maLH=?";
-                PreparedStatement ps2 = conn.prepareStatement(sql2);
-                ps2.setInt(1, maLH);
-                ResultSet rs2 = ps2.executeQuery();
-
-                if (rs2.next()) {
-                    int max = rs2.getInt(1);
-                    return count >= max;
-                }
+                int soLuong = rs.getInt("soLuong");
+                int siSoMax = rs.getInt("siSoMax");
+                return soLuong >= siSoMax;
             }
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public boolean register(int maND, int maLH) {
-        String sql = "INSERT INTO PHIEUDANGKY(maND, maLH) VALUES(?,?)";
+    public boolean register(int maND, int maLH, String hoTen, String email, String sdt, String diaChi) {
+
+        String sql = "INSERT INTO PHIEUDANGKY(maND, maLH, hoTen, email, SDT, diaChi) VALUES(?,?,?,?,?,?)";
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maND);
             ps.setInt(2, maLH);
+            ps.setString(3, hoTen);
+            ps.setString(4, email);
+            ps.setString(5, sdt);
+            ps.setString(6, diaChi);
+
             return ps.executeUpdate() > 0;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+
+            // lỗi trùng đăng ký (UNIQUE)
+            if (e.getMessage().contains("Duplicate")) {
+                System.out.println("Đã đăng ký trước đó!");
+            }
+
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean duyetDangKy(int maDK) {
+        String sql = "UPDATE PHIEUDANGKY SET tinhTrangDuyet='DaDuyet' WHERE maDK=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, maDK);
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;

@@ -1,35 +1,43 @@
 package controller;
-import dao.*;
-import javax.servlet.*;
+import dao.DangKyDAO;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+@WebServlet("/dangky")
 public class DangKyServlet extends HttpServlet {
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        LopHocDAO dao = new LopHocDAO();
-        request.setAttribute("list", dao.getAll());
-        request.getRequestDispatcher("class-list.jsp").forward(request, response);
-    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int maLH = Integer.parseInt(request.getParameter("maLH"));
-        int maND = (int) request.getSession().getAttribute("userId");
+        HttpSession session = request.getSession();
+        Object user = session.getAttribute("maND");
 
-        DangKyDAO dao = new DangKyDAO();
-
-        if (dao.isDangKy(maND, maLH)) {
-            request.setAttribute("error", "Đã đăng ký!");
-        } else if (dao.isFull(maLH)) {
-            request.setAttribute("error", "Lớp đã đầy!");
-        } else {
-            dao.register(maND, maLH);
-            request.setAttribute("success", "Đăng ký thành công!");
+        if (user == null) {
+            response.sendRedirect("login.jsp");
+            return;
         }
 
-        doGet(request, response);
+        int maND = (int) user;
+        int maLH = Integer.parseInt(request.getParameter("maLH"));
+        String hoTen = request.getParameter("hoTen");
+        String email = request.getParameter("email");
+        String sdt = request.getParameter("sdt");
+        String diaChi = request.getParameter("diaChi");
+
+        DangKyDAO dao = new DangKyDAO();
+        String msg;
+
+        if (dao.isDangKy(maND, maLH)) {
+            msg = "Bạn đã đăng ký lớp này!";
+        } else if (dao.isFull(maLH)) {
+            msg = "Lớp đã đầy!";
+        } else {
+            dao.register(maND, maLH, hoTen, email, sdt, diaChi);
+            msg = "Đăng ký thành công! Chờ duyệt.";
+        }
+
+        request.setAttribute("msg", msg);
+        request.getRequestDispatcher("view/DangKy.jsp").forward(request, response);
     }
 }
