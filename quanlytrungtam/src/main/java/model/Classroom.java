@@ -3,60 +3,69 @@ package model;
 import java.sql.Date;
 
 public class ClassRoom {
-    private int    classId;
-    private int    courseId;
-    private String className;
-    private int    stuMax;
-    private Date   startDate;
+    private int maLH;
+    private int maKH;
+    private int maTT;
+    private String tenLH;
+    private int sisoMax;
+    private Date ngayKhaiGiang;
 
     public ClassRoom() {}
 
-    public ClassRoom(int classId, int courseId, String className,
-                     int stuMax, Date startDate) {
-        this.classId   = classId;
-        this.courseId  = courseId;
-        this.className = className;
-        this.stuMax    = stuMax;
-        this.startDate = startDate;
+    public ClassRoom(int maLH, int maKH, int maTT, String tenLH, int sisoMax, Date ngayKhaiGiang) {
+        this.maLH = maLH;
+        this.maKH = maKH;
+        this.maTT = maTT;
+        this.tenLH = tenLH;
+        this.sisoMax = sisoMax;
+        this.ngayKhaiGiang = ngayKhaiGiang;
     }
 
     public int getClassId() {
-        return classId;
+        return maLH;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setClassId(int maLH) {
+        this.maLH = maLH;
     }
 
     public int getCourseId() {
-        return courseId;
+        return maKH;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourseId(int maKH) {
+        this.maKH = maKH;
+    }
+
+    public int getCenterId() {
+        return maTT;
+    }
+
+    public void setCenterId(int maTT) {
+        this.maTT = maTT;
     }
 
     public String getClassName() {
-        return className;
+        return tenLH;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setClassName(String tenLH) {
+        this.tenLH = tenLH;
     }
 
     public int getStuMax() {
-        return stuMax;
+        return sisoMax;
     }
 
-    public void setStuMax(int stuMax) {
-        this.stuMax = stuMax;
+    public void setStuMax(int sisoMax) {
+        this.sisoMax = sisoMax;
     }
 
     public Date getStartDate() {
-        return startDate;
+        return ngayKhaiGiang;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDate(Date ngayKhaiGiang) {
+        this.ngayKhaiGiang = ngayKhaiGiang;
     }
 }

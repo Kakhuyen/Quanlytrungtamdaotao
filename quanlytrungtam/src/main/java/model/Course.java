@@ -1,60 +1,59 @@
 package model;
 
 public class Course {
-    private int    courseId;
-    private String courseName;
-    private String description;
-    private double tuition;
-    private String image;
+    private int maKH;
+    private String tenKH;
+    private String moTa;
+    private double hocPhi;
+    private String hinhAnh;
 
     public Course() {}
 
-    public Course(int courseId, String courseName, String description,
-                  double tuition, String image) {
-        this.courseId    = courseId;
-        this.courseName  = courseName;
-        this.description = description;
-        this.tuition     = tuition;
-        this.image       = image;
+    public Course(int maKH, String tenKH, String moTa, double hocPhi, String hinhAnh) {
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+        this.moTa = moTa;
+        this.hocPhi = hocPhi;
+        this.hinhAnh = hinhAnh;
     }
 
     public int getCourseId() {
-        return courseId;
+        return MaKH;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourseId(int MaKH) {
+        this.MaKH = MaKH;
     }
 
     public String getCourseName() {
-        return courseName;
+        return tenKH;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourseName(String tenKH) {
+        this.tenKH = tenKH;
     }
 
     public String getDescription() {
-        return description;
+        return moTa;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String moTa) {
+        this.moTa = moTa;
     }
 
     public double getTuition() {
-        return tuition;
+        return hocPhi;
     }
 
-    public void setTuition(double tuition) {
-        this.tuition = tuition;
+    public void setTuition(double hocPhi) {
+        this.hocPhi = hocPhi;
     }
 
     public String getImage() {
-        return image;
+        return hinhAnh;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
     }
 }
