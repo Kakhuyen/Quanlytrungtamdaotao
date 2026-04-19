@@ -32,6 +32,7 @@ public class CourseService {
         return courseDAO.searchCourses(kw);
     }
 
+    // VALIDATE FOR courseName and tuition
     public String validate(Course c) {
         if (c.getCourseName() == null || c.getCourseName().trim().isEmpty())
             return "Tên khóa học không được để trống.";
