@@ -40,12 +40,50 @@
             object-fit: cover;
             border-radius: 4px;
             display: block;
+            margin: 0 auto;
         }
 
         .form-panel {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 8px #0001;
+        }
+
+        .table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .col-stt {
+            width: 40px;
+            text-align: center;
+        }
+
+        .col-img {
+            width: 80px;
+        }
+
+        .col-name {
+            width: 25%;
+        }
+
+        .col-desc {
+            width: 30%;
+        }
+
+        .col-tuition {
+            width: 130px;
+        }
+
+        .col-action {
+            width: 100px;
+        }
+
+        .col-name span,
+        .col-desc span {
+            white-space: normal;
+            word-break: break-word;
+            display: block;
         }
     </style>
 </head>
@@ -133,7 +171,8 @@
                                     class="text-danger">*</span></label>
                             <input type="number" name="tuition" class="form-control" min="0" max="100000000"
                                    placeholder="VD: 5.000.000"
-                                   value="<fmt:formatNumber value='${course.tuition}' type='number' groupingUsed='false' maxFractionDigits='0'/>" required
+                                   value="<fmt:formatNumber value='${course.tuition}' type='number' groupingUsed='false' maxFractionDigits='0'/>"
+                                   required
                                    oninvalid="this.setCustomValidity('Học phí phải nhỏ hơn hoặc bằng 100.000.000')"
                                    oninput="this.setCustomValidity('')">
                         </div>
@@ -193,12 +232,12 @@
                         <table class="table table-hover table-striped align-middle mb-0">
                             <thead class="table-dark">
                             <tr>
-                                <th>#</th>
-                                <th>Ảnh</th>
-                                <th>Tên khóa học</th>
-                                <th>Mô tả</th>
-                                <th class="text-end">Học phí</th>
-                                <th class="text-center">Thao tác</th>
+                                <th class="col-stt text-center">#</th>
+                                <th class="col-img text-center">Ảnh</th>
+                                <th class="col-name text-center">Tên khóa học</th>
+                                <th class="col-desc text-center">Mô tả</th>
+                                <th class="col-tuition text-center">Học phí</th>
+                                <th class="col-action text-center">Thao tác</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -214,16 +253,17 @@
                                 <c:otherwise>
                                     <c:forEach items="${courses}" var="c" varStatus="st">
                                         <tr>
-                                            <td>${st.count}</td>
-                                            <td>
+                                            <td class="text-center">${st.count}</td>
+                                            <td class="text-center">
                                                 <img src="${pageContext.request.contextPath}/view/${empty c.image ? 'fullstackweb.jpg' : c.image}"
                                                      alt="${c.courseName}" class="table-img"
                                                      onerror="this.src='${pageContext.request.contextPath}/view/fullstackweb.jpg'">
                                             </td>
-                                            <td class="fw-semibold">${c.courseName}</td>
-                                            <td class="text-muted" style="max-width:200px">
-                        <span class="d-inline-block text-truncate" style="max-width:180px"
-                              title="${c.description}">${c.description}</span>
+                                            <td class="fw-semibold col-name">
+                                                <span>${c.courseName}</span>
+                                            </td>
+                                            <td class="text-muted col-desc">
+                                                <span title="${c.description}">${c.description}</span>
                                             </td>
                                             <td class="text-end">
                                                 <fmt:formatNumber value="${c.tuition}" type="number"
