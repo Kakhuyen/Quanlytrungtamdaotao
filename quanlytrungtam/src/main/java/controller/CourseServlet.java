@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/admin/courses")
-public class CourseController extends HttpServlet {
+public class CourseServlet extends HttpServlet {
 
     private final CourseService service = new CourseService();
 
@@ -88,8 +88,8 @@ public class CourseController extends HttpServlet {
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
-            int    courseId = Integer.parseInt(req.getParameter("id"));
-            Course course   = service.getCourse(courseId);
+            int courseId = Integer.parseInt(req.getParameter("id"));
+            Course course = service.getCourse(courseId);
             if (course == null) {
                 req.setAttribute("errorMsg", "Không tìm thấy khóa học.");
                 listCourses(req, resp);
@@ -108,7 +108,7 @@ public class CourseController extends HttpServlet {
     private void insertCourse(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Course course = buildCourseFromRequest(req, 0);
-        String error  = service.validate(course);
+        String error = service.validate(course);
 
         if (error != null) {
             req.setAttribute("errorMsg", error);
@@ -120,15 +120,15 @@ public class CourseController extends HttpServlet {
 
         boolean ok = service.insertCourse(course);
         if (ok) req.setAttribute("successMsg", "Thêm khóa học thành công!");
-        else    req.setAttribute("errorMsg",   "Thêm thất bại. Vui lòng thử lại.");
+        else req.setAttribute("errorMsg", "Thêm thất bại. Vui lòng thử lại.");
         listCourses(req, resp);
     }
 
     private void updateCourse(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int    courseId = Integer.parseInt(req.getParameter("courseId"));
-        Course course   = buildCourseFromRequest(req, courseId);
-        String error    = service.validate(course);
+        int courseId = Integer.parseInt(req.getParameter("courseId"));
+        Course course = buildCourseFromRequest(req, courseId);
+        String error = service.validate(course);
 
         if (error != null) {
             req.setAttribute("errorMsg", error);
@@ -141,17 +141,17 @@ public class CourseController extends HttpServlet {
 
         boolean ok = service.updateCourse(course);
         if (ok) req.setAttribute("successMsg", "Cập nhật thành công!");
-        else    req.setAttribute("errorMsg",   "Cập nhật thất bại. Vui lòng thử lại.");
+        else req.setAttribute("errorMsg", "Cập nhật thất bại. Vui lòng thử lại.");
         listCourses(req, resp);
     }
 
     private void deleteCourse(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
         try {
-            int     courseId = Integer.parseInt(req.getParameter("id"));
-            boolean ok       = service.deleteCourse(courseId);
+            int courseId = Integer.parseInt(req.getParameter("id"));
+            boolean ok = service.deleteCourse(courseId);
             if (ok) req.setAttribute("successMsg", "Xóa khóa học thành công!");
-            else    req.setAttribute("errorMsg",   "Xóa thất bại.");
+            else req.setAttribute("errorMsg", "Xóa thất bại.");
         } catch (NumberFormatException e) {
             req.setAttribute("errorMsg", "ID không hợp lệ.");
         }
@@ -161,11 +161,13 @@ public class CourseController extends HttpServlet {
     // HELPER
     private Course buildCourseFromRequest(HttpServletRequest req, int courseId) {
         String courseName = req.getParameter("courseName");
-        String desc       = req.getParameter("description");
-        String imageName  = req.getParameter("image");
-        double tuition    = 0;
-        try { tuition = Double.parseDouble(req.getParameter("tuition")); }
-        catch (NumberFormatException ignored) {}
+        String desc = req.getParameter("description");
+        String imageName = req.getParameter("image");
+        double tuition = 0;
+        try {
+            tuition = Double.parseDouble(req.getParameter("tuition"));
+        } catch (NumberFormatException ignored) {
+        }
 
         Course c = new Course();
         c.setCourseId(courseId);

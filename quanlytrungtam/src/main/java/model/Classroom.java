@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class ClassRoom {
+class Classroom {
     private int maLH;
     private int maKH;
     private int maTT;
@@ -10,9 +10,10 @@ public class ClassRoom {
     private int sisoMax;
     private Date ngayKhaiGiang;
 
-    public ClassRoom() {}
+    public Classroom() {
+    }
 
-    public ClassRoom(int maLH, int maKH, int maTT, String tenLH, int sisoMax, Date ngayKhaiGiang) {
+    public Classroom(int maLH, int maKH, int maTT, String tenLH, int sisoMax, Date ngayKhaiGiang) {
         this.maLH = maLH;
         this.maKH = maKH;
         this.maTT = maTT;

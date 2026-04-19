@@ -7,7 +7,8 @@ public class Course {
     private double hocPhi;
     private String hinhAnh;
 
-    public Course() {}
+    public Course() {
+    }
 
     public Course(int maKH, String tenKH, String moTa, double hocPhi, String hinhAnh) {
         this.maKH = maKH;
@@ -18,11 +19,11 @@ public class Course {
     }
 
     public int getCourseId() {
-        return MaKH;
+        return maKH;
     }
 
-    public void setCourseId(int MaKH) {
-        this.MaKH = MaKH;
+    public void setCourseId(int maKH) {
+        this.maKH = maKH;
     }
 
     public String getCourseName() {
