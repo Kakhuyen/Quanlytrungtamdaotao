@@ -123,14 +123,19 @@
                                     class="text-danger">*</span></label>
                             <input type="text" name="courseName" class="form-control"
                                    placeholder="VD: Java Web Development"
-                                   value="${course.courseName}" required>
+                                   value="${course.courseName}"
+                                   maxlength="100"
+                                   required>
+                            <div class="form-text">Tối đa 100 ký tự.</div>
                         </div>
                         <div class="col-md-2">
                             <label class="form-label fw-semibold">Học phí (VNĐ) <span
                                     class="text-danger">*</span></label>
-                            <input type="number" name="tuition" class="form-control" min="0" step="100000"
-                                   placeholder="5.000.000"
-                                   value="${course.tuition}" required>
+                            <input type="number" name="tuition" class="form-control" min="0" max="100000000"
+                                   placeholder="VD: 5.000.000"
+                                   value="<fmt:formatNumber value='${course.tuition}' type='number' groupingUsed='false' maxFractionDigits='0'/>" required
+                                   oninvalid="this.setCustomValidity('Học phí phải nhỏ hơn hoặc bằng 100.000.000')"
+                                   oninput="this.setCustomValidity('')">
                         </div>
                         <div class="col-md-3">
                             <label class="form-label fw-semibold">Tên file ảnh</label>
@@ -142,7 +147,9 @@
                             <label class="form-label fw-semibold">Mô tả</label>
                             <input type="text" name="description" class="form-control"
                                    placeholder="Mô tả ngắn về khóa học"
-                                   value="${course.description}">
+                                   value="${course.description}"
+                                   maxlength="200">
+                            <div class="form-text">Tối đa 200 ký tự.</div>
                         </div>
                     </div>
 

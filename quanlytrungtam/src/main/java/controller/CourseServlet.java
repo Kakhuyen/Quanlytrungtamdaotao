@@ -119,9 +119,11 @@ public class CourseServlet extends HttpServlet {
         }
 
         boolean ok = service.insertCourse(course);
-        if (ok) req.setAttribute("successMsg", "Thêm khóa học thành công!");
-        else req.setAttribute("errorMsg", "Thêm thất bại. Vui lòng thử lại.");
-        listCourses(req, resp);
+        HttpSession session = req.getSession();
+        if (ok) session.setAttribute("successMsg", "Thêm khóa học thành công!");
+        else session.setAttribute("errorMsg", "Thêm thất bại. Vui lòng thử lại.");
+
+        resp.sendRedirect(req.getContextPath() + "/admin/courses");
     }
 
     private void updateCourse(HttpServletRequest req, HttpServletResponse resp)
@@ -140,9 +142,11 @@ public class CourseServlet extends HttpServlet {
         }
 
         boolean ok = service.updateCourse(course);
-        if (ok) req.setAttribute("successMsg", "Cập nhật thành công!");
-        else req.setAttribute("errorMsg", "Cập nhật thất bại. Vui lòng thử lại.");
-        listCourses(req, resp);
+        HttpSession session = req.getSession();
+        if (ok) session.setAttribute("successMsg", "Cập nhật thành công!");
+        else session.setAttribute("errorMsg", "Cập nhật thất bại. Vui lòng thử lại.");
+
+        resp.sendRedirect(req.getContextPath() + "/admin/courses");
     }
 
     private void deleteCourse(HttpServletRequest req, HttpServletResponse resp)
