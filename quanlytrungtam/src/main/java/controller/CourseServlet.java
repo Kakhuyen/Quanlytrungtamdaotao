@@ -68,6 +68,18 @@ public class CourseServlet extends HttpServlet {
     // ACTIONS
     private void listCourses(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String successMsg = (String) session.getAttribute("successMsg");
+        String errorMsg   = (String) session.getAttribute("errorMsg");
+        if (successMsg != null) {
+            req.setAttribute("successMsg", successMsg);
+            session.removeAttribute("successMsg");
+        }
+        if (errorMsg != null) {
+            req.setAttribute("errorMsg", errorMsg);
+            session.removeAttribute("errorMsg");
+        }
+
         List<Course> courses = service.getAllCourses();
         req.setAttribute("courses", courses);
         req.setAttribute("totalCourse", courses.size());
@@ -90,17 +102,20 @@ public class CourseServlet extends HttpServlet {
         try {
             int courseId = Integer.parseInt(req.getParameter("id"));
             Course course = service.getCourse(courseId);
+
             if (course == null) {
-                req.setAttribute("errorMsg", "Không tìm thấy khóa học.");
-                listCourses(req, resp);
+                req.getSession().setAttribute("errorMsg", "Không tìm thấy khóa học ID = " + courseId);
+                resp.sendRedirect(req.getContextPath() + "/admin/courses");
                 return;
             }
+
             req.setAttribute("course", course);
             req.setAttribute("editMode", true);
-            // Tải lại danh sách để hiển thị bảng bên cạnh
             req.setAttribute("courses", service.getAllCourses());
             req.getRequestDispatcher("/admin/course-list.jsp").forward(req, resp);
+
         } catch (NumberFormatException e) {
+            req.getSession().setAttribute("errorMsg", "ID không hợp lệ.");
             resp.sendRedirect(req.getContextPath() + "/admin/courses");
         }
     }
@@ -151,15 +166,16 @@ public class CourseServlet extends HttpServlet {
 
     private void deleteCourse(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
+        HttpSession session = req.getSession();
         try {
             int courseId = Integer.parseInt(req.getParameter("id"));
             boolean ok = service.deleteCourse(courseId);
-            if (ok) req.setAttribute("successMsg", "Xóa khóa học thành công!");
-            else req.setAttribute("errorMsg", "Xóa thất bại.");
+            if (ok) session.setAttribute("successMsg", "Xóa khóa học thành công!");
+            else    session.setAttribute("errorMsg",   "Xóa thất bại.");
         } catch (NumberFormatException e) {
-            req.setAttribute("errorMsg", "ID không hợp lệ.");
+            session.setAttribute("errorMsg", "ID không hợp lệ.");
         }
-        listCourses(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/admin/courses");
     }
 
     // HELPER
