@@ -12,7 +12,6 @@ public class Classroom {
 
     public Classroom() {
     }
-
     public int getMaLH() {
         return maLH;
     }
