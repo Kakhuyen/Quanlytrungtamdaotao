@@ -1,4 +1,4 @@
-package com.quanly.model;
+package model;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
-package com.quanly.filter;
+package filter;
 
-import com.quanly.model.NguoiDung;
+import model.NguoiDung;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

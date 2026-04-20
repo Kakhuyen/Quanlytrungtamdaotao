@@ -1,7 +1,7 @@
-package com.quanly.controller;
+package controller;
 
-import com.quanly.dao.UserDAO;
-import com.quanly.model.NguoiDung;
+import dao.UserDAO;
+import model.NguoiDung;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

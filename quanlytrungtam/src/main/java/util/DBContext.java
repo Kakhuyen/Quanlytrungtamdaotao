@@ -1,4 +1,4 @@
-package com.quanly.util;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

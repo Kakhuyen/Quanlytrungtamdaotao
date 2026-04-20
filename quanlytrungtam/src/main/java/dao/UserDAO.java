@@ -1,8 +1,8 @@
-package com.quanly.dao;
+package dao;
 
-import com.quanly.model.NguoiDung;
-import com.quanly.model.VaiTro;
-import com.quanly.util.DBContext;
+import model.NguoiDung;
+import model.VaiTro;
+import util.DBContext;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

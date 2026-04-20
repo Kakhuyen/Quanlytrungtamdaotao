@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.quanly.model.NguoiDung" %>
+<%@ page import="model.NguoiDung" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
