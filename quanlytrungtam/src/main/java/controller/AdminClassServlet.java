@@ -1,7 +1,6 @@
 package controller;
-
-import com.quanly.dao.ClassDAO;
-import com.quanly.model.Classroom;
+import dao.ClassDAO;
+import model.Classroom;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

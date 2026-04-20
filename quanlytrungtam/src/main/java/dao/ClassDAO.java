@@ -1,7 +1,7 @@
 package dao;
 
-import com.quanly.model.Classroom;
-import com.quanly.util.DBConnection;
+import model.Classroom;
+import util.DBConnection;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
