@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/admin/*", "/hocvien/*"})
+@WebFilter(urlPatterns = {"/admin/*", "/course", "/course/*"})
 public class AuthFilter implements Filter {
 
     @Override
@@ -36,14 +36,29 @@ public class AuthFilter implements Filter {
         }
 
         String uri = req.getRequestURI();
+        String contextPath = req.getContextPath();
+        String path = uri.substring(contextPath.length());
+
+        // Legacy URL compatibility after route migration.
+        if (uri.endsWith("/admin/dashboard.jsp")) {
+            resp.sendRedirect(req.getContextPath() + "/admin/course");
+            return;
+        }
+        if (uri.endsWith("/hocvien/home.jsp")) {
+            resp.sendRedirect(req.getContextPath() + "/course");
+            return;
+        }
+
         int maVaiTro = user.getVaiTro().getMaVaiTro();
 
-        if (uri.contains("/admin/") && maVaiTro != 1) {
+        boolean isAdminRoute = path.startsWith("/admin/");
+        if (isAdminRoute && maVaiTro != 1) {
             resp.sendRedirect(req.getContextPath() + "/login?error=forbidden");
             return;
         }
 
-        if (uri.contains("/hocvien/") && maVaiTro != 2) {
+        boolean isHocVienRoute = path.equals("/course") || path.startsWith("/course/");
+        if (isHocVienRoute && maVaiTro != 2) {
             resp.sendRedirect(req.getContextPath() + "/login?error=forbidden");
             return;
         }

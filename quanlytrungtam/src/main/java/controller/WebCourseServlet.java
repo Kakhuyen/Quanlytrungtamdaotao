@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/courses") // URL dành cho học viên
+@WebServlet("/course") // URL dành cho học viên
 public class WebCourseServlet extends HttpServlet {
 
     private final CourseService service = new CourseService();

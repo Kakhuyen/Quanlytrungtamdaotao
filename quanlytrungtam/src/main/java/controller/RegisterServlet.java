@@ -28,11 +28,11 @@ public class RegisterServlet extends HttpServlet {
             if (user != null && user.getVaiTro() != null) {
                 int maVaiTro = user.getVaiTro().getMaVaiTro();
                 if (maVaiTro == 1) {
-                    response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/admin/course");
                     return;
                 }
                 if (maVaiTro == 2) {
-                    response.sendRedirect(request.getContextPath() + "/hocvien/home.jsp");
+                    response.sendRedirect(request.getContextPath() + "/course");
                     return;
                 }
             }

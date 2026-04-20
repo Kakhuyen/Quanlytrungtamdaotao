@@ -102,8 +102,13 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin/courses">
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/admin/course">
                         <i class="bi bi-journals me-2"></i>Khóa học
+                    </a>
+                </li>
+                <li class="nav-item mt-2">
+                    <a class="nav-link text-danger" href="${pageContext.request.contextPath}/logout">
+                        <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
                     </a>
                 </li>
             </ul>
@@ -153,7 +158,7 @@
                     ${editMode ? 'Cập nhật khóa học' : 'Thêm khóa học mới'}
                 </h5>
 
-                <form action="${pageContext.request.contextPath}/admin/courses" method="post">
+                <form action="${pageContext.request.contextPath}/admin/course" method="post">
                     <input type="hidden" name="action" value="${editMode ? 'update' : 'insert'}">
                     <c:if test="${editMode}">
                         <input type="hidden" name="courseId" value="${course.courseId}">
@@ -204,7 +209,7 @@
                             ${editMode ? 'Cập nhật' : 'Thêm mới'}
                         </button>
                         <c:if test="${editMode}">
-                            <a href="${pageContext.request.contextPath}/admin/courses"
+                            <a href="${pageContext.request.contextPath}/admin/course"
                                class="btn btn-secondary ms-2">
                                 <i class="bi bi-x-lg me-1"></i>Hủy
                             </a>
@@ -218,7 +223,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h6 class="mb-0"><i class="bi bi-table me-2"></i>Danh sách khóa học</h6>
                     <form class="d-flex gap-2"
-                          action="${pageContext.request.contextPath}/admin/courses" method="get">
+                          action="${pageContext.request.contextPath}/admin/course" method="get">
                         <input type="hidden" name="action" value="search">
                         <input type="search" name="keyword" class="form-control form-control-sm"
                                style="width:220px" placeholder="Tìm tên khóa học..."
@@ -227,7 +232,7 @@
                             <i class="bi bi-search"></i>
                         </button>
                         <c:if test="${not empty keyword}">
-                            <a href="${pageContext.request.contextPath}/admin/courses"
+                            <a href="${pageContext.request.contextPath}/admin/course"
                                class="btn btn-sm btn-outline-secondary">Xóa lọc</a>
                         </c:if>
                     </form>
@@ -276,7 +281,7 @@
                                                                   groupingUsed="true"/>đ
                                             </td>
                                             <td class="text-center">
-                                                <a href="${pageContext.request.contextPath}/admin/courses?action=edit&id=${c.courseId}"
+                                                <a href="${pageContext.request.contextPath}/admin/course?action=edit&id=${c.courseId}"
                                                    class="btn btn-sm btn-outline-warning me-1"
                                                    title="Sửa">
                                                     <i class="bi bi-pencil"></i>
@@ -335,7 +340,7 @@
     function confirmDelete(id, name) {
         document.getElementById('deleteName').textContent = name;
         document.getElementById('deleteLink').href =
-            '${pageContext.request.contextPath}/admin/courses?action=delete&id=' + id;
+            '${pageContext.request.contextPath}/admin/course?action=delete&id=' + id;
         new bootstrap.Modal(document.getElementById('deleteModal')).show();
     }
 </script>

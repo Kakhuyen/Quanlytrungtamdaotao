@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/courses")
+@WebServlet("/admin/course")
 public class CourseServlet extends HttpServlet {
 
     private final CourseService service = new CourseService();
@@ -61,7 +61,7 @@ public class CourseServlet extends HttpServlet {
                 updateCourse(req, resp);
                 break;
             default:
-                resp.sendRedirect(req.getContextPath() + "/admin/courses");
+                resp.sendRedirect(req.getContextPath() + "/admin/course");
         }
     }
 
@@ -105,7 +105,7 @@ public class CourseServlet extends HttpServlet {
 
             if (course == null) {
                 req.getSession().setAttribute("errorMsg", "Không tìm thấy khóa học ID = " + courseId);
-                resp.sendRedirect(req.getContextPath() + "/admin/courses");
+                resp.sendRedirect(req.getContextPath() + "/admin/course");
                 return;
             }
 
@@ -116,7 +116,7 @@ public class CourseServlet extends HttpServlet {
 
         } catch (NumberFormatException e) {
             req.getSession().setAttribute("errorMsg", "ID không hợp lệ.");
-            resp.sendRedirect(req.getContextPath() + "/admin/courses");
+            resp.sendRedirect(req.getContextPath() + "/admin/course");
         }
     }
 
@@ -138,7 +138,7 @@ public class CourseServlet extends HttpServlet {
         if (ok) session.setAttribute("successMsg", "Thêm khóa học thành công!");
         else session.setAttribute("errorMsg", "Thêm thất bại. Vui lòng thử lại.");
 
-        resp.sendRedirect(req.getContextPath() + "/admin/courses");
+        resp.sendRedirect(req.getContextPath() + "/admin/course");
     }
 
     private void updateCourse(HttpServletRequest req, HttpServletResponse resp)
@@ -161,7 +161,7 @@ public class CourseServlet extends HttpServlet {
         if (ok) session.setAttribute("successMsg", "Cập nhật thành công!");
         else session.setAttribute("errorMsg", "Cập nhật thất bại. Vui lòng thử lại.");
 
-        resp.sendRedirect(req.getContextPath() + "/admin/courses");
+        resp.sendRedirect(req.getContextPath() + "/admin/course");
     }
 
     private void deleteCourse(HttpServletRequest req, HttpServletResponse resp)
@@ -175,7 +175,7 @@ public class CourseServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             session.setAttribute("errorMsg", "ID không hợp lệ.");
         }
-        resp.sendRedirect(req.getContextPath() + "/admin/courses");
+        resp.sendRedirect(req.getContextPath() + "/admin/course");
     }
 
     // HELPER

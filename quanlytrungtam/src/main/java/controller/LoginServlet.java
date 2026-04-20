@@ -19,17 +19,22 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("error") != null) {
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
+        }
+
         HttpSession session = request.getSession(false);
         if (session != null) {
             NguoiDung user = (NguoiDung) session.getAttribute("user");
             if (user != null && user.getVaiTro() != null) {
                 int maVaiTro = user.getVaiTro().getMaVaiTro();
                 if (maVaiTro == 1) {
-                    response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/admin/course");
                     return;
                 }
                 if (maVaiTro == 2) {
-                    response.sendRedirect(request.getContextPath() + "/hocvien/home.jsp");
+                    response.sendRedirect(request.getContextPath() + "/course");
                     return;
                 }
             }
@@ -57,12 +62,12 @@ public class LoginServlet extends HttpServlet {
 
         int maVaiTro = user.getVaiTro().getMaVaiTro();
         if (maVaiTro == 1) {
-            response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
+            response.sendRedirect(request.getContextPath() + "/admin/course");
             return;
         }
 
         if (maVaiTro == 2) {
-            response.sendRedirect(request.getContextPath() + "/hocvien/home.jsp");
+            response.sendRedirect(request.getContextPath() + "/course");
             return;
         }
 

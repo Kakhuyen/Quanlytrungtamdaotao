@@ -39,6 +39,9 @@
         <a class="navbar-brand fw-bold" href="#">
             <i class="bi bi-mortarboard-fill me-2"></i>Training Center
         </a>
+        <a class="btn btn-outline-light btn-sm" href="${pageContext.request.contextPath}/logout">
+            <i class="bi bi-box-arrow-right me-1"></i>Đăng xuất
+        </a>
     </div>
 </nav>
 
@@ -49,7 +52,7 @@
         <p class="lead">Nâng cao kỹ năng – Phát triển sự nghiệp</p>
         <%-- Search --%>
         <form class="d-flex justify-content-center mt-3 gap-2"
-              action="${pageContext.request.contextPath}/admin/courses" method="get">
+              action="${pageContext.request.contextPath}/course" method="get">
             <input type="hidden" name="action" value="search">
             <input type="search" name="keyword" class="form-control" style="max-width:360px"
                    placeholder="Tìm khóa học..." value="${keyword}">
@@ -64,7 +67,7 @@
     <c:if test="${not empty keyword}">
         <p class="text-muted mb-3">
             Kết quả cho "<strong>${keyword}</strong>" — ${courses.size()} khóa học
-            <a href="${pageContext.request.contextPath}/admin/courses" class="ms-2 btn btn-sm btn-outline-secondary">
+            <a href="${pageContext.request.contextPath}/course" class="ms-2 btn btn-sm btn-outline-secondary">
                 Xem tất cả
             </a>
         </p>
