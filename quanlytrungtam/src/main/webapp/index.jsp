@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.quanly.model.NguoiDung" %>
+<%@ page import="model.NguoiDung" %>
 <%@ include file="/header.jsp" %>
 
 <%

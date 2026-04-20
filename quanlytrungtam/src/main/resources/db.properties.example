@@ -1,0 +1,7 @@
+# Copy this file to db.properties and edit the values for your local MySQL database.
+# The application loads values from DB_URL/DB_USER/DB_PASSWORD env vars first,
+# then Java system properties db.url/db.user/db.password, then this file.
+
+db.url=jdbc:mysql://localhost:3306/quanlytrungtam?useSSL=false&serverTimezone=UTC
+db.user=root
+db.password=123456
