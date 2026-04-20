@@ -3,12 +3,6 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class DBConnection {
-    public static Connection conn;
-
 public class DBConnection {
 
     public static Connection getConnection() {
