@@ -1,5 +1,4 @@
 package dao;
-
 import model.Classroom;
 import util.DBConnection;
 import java.sql.Connection;
@@ -10,33 +9,39 @@ import java.util.ArrayList;
 import java.util.List;
 public class ClassDAO {
 
-    public List<Classroom> getAll() {
+    public List<Classroom> getAll() throws Exception {
 
         List<Classroom> list = new ArrayList<>();
 
         String sql =
-                "SELECT l.maLH, l.maKH, l.maTT, l.tenLH, l.siSoMax, l.ngayKhaiGiang, k.tenKH " +
-                        "FROM LOPHOC l " +
-                        "INNER JOIN KHOAHOC k ON l.maKH = k.maKH " +
-                        "ORDER BY l.maLH DESC";
+                "SELECT maLH, tenLH, siSoMax, ngayKhaiGiang " +
+                        "FROM LOPHOC ORDER BY maLH";
 
-        try (
-                Connection conn = DBConnection.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()
-        ) {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                list.add(mapRow(rs));
+        while (rs.next()) {
+
+            Classroom c = new Classroom();
+
+            c.setMaLH(rs.getInt("maLH"));
+            c.setTenLH(rs.getString("tenLH"));
+            c.setSiSoMax(rs.getInt("siSoMax"));
+            Date d = rs.getDate("ngayKhaiGiang");
+            if (d != null) {
+                c.setNgayKhaiGiang(d.toLocalDate());
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException("Không thể lấy danh sách lớp học.", e);
+            list.add(c);
         }
+
+        rs.close();
+        ps.close();
+        conn.close();
 
         return list;
     }
-
     public Classroom findById(int maLH) {
 
         if (maLH <= 0) {

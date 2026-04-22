@@ -23,19 +23,19 @@
                 <div class="card-body p-4">
 
                     <c:if test="${not empty error}">
-                        <div class="alert alert-danger">
-                                ${error}
-                        </div>
+                    <div class="alert alert-danger">
+                            ${error}
+                    </div>
                     </c:if>
 
                     <c:if test="${not empty success}">
-                        <div class="alert alert-success">
-                                ${success}
-                        </div>
+                    <div class="alert alert-success">
+                            ${success}
+                    </div>
                     </c:if>
 
                     <form method="post"
-                          action="${pageContext.request.contextPath}/hocvien/enroll">
+                          action="${pageContext.request.contextPath}/web/enroll">
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">

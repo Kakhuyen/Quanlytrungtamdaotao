@@ -128,11 +128,18 @@
 
                 <li class="nav-item">
                     <a class="nav-link"
-                       href="${pageContext.request.contextPath}/hocvien/class-list">
-                        Lớp học
+                       href="${pageContext.request.contextPath}/web/course-grid.jsp">
+                        Khóa học
                     </a>
                 </li>
 
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="${pageContext.request.contextPath}/web/class-list.jsp">
+                        Lớp học
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link"
                        href="#">
@@ -156,7 +163,7 @@
             </form>
             <div class="login-group">
 
-                <a href="${pageContext.request.contextPath}/login"
+                <a href="${pageContext.request.contextPath}/login.jsp"
                    title="Đăng nhập">
                     <i class="bi bi-person-circle"></i>
                 </a>

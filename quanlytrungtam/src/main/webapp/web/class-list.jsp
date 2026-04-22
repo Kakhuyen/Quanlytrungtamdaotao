@@ -21,7 +21,7 @@
     <div class="row justify-content-center mb-4">
         <div class="col-md-6">
 
-            <form action="${pageContext.request.contextPath}/hocvien/class-list"
+            <form action="${pageContext.request.contextPath}/web/class-list"
                   method="get"
                   class="d-flex">
 
@@ -57,7 +57,6 @@
                 <th>Khóa học</th>
                 <th>Sĩ số</th>
                 <th>Khai giảng</th>
-                <th>Đăng ký</th>
             </tr>
             </thead>
 
@@ -76,12 +75,6 @@
                             <td>${lop.siSoMax}</td>
                             <td>${lop.ngayKhaiGiang}</td>
 
-                            <td>
-                                <a href="${pageContext.request.contextPath}/hocvien/enroll?maLH=${lop.maLH}"
-                                   class="btn btn-success btn-sm">
-                                    Đăng ký
-                                </a>
-                            </td>
                         </tr>
 
                     </c:forEach>

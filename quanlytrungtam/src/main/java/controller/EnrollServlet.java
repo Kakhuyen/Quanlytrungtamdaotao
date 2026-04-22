@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/hocvien/enroll")
+@WebServlet("/web/enroll")
 public class EnrollServlet extends HttpServlet {
 
     private final ClassDAO classDAO = new ClassDAO();
@@ -39,7 +39,7 @@ public class EnrollServlet extends HttpServlet {
             );
         }
 
-        request.getRequestDispatcher("/hocvien/enroll.jsp")
+        request.getRequestDispatcher("/web/enroll.jsp")
                 .forward(request, response);
     }
 
@@ -162,7 +162,7 @@ public class EnrollServlet extends HttpServlet {
 
                 response.sendRedirect(
                         request.getContextPath()
-                                + "/hocvien/class-list?success=1"
+                                + "/web/class-list?success=1"
                 );
                 return;
             }
@@ -187,19 +187,23 @@ public class EnrollServlet extends HttpServlet {
             );
         }
 
-        reload(request, response);
+        try {
+            reload(request, response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void reload(HttpServletRequest request,
                         HttpServletResponse response)
-            throws ServletException, IOException {
+            throws Exception {
 
         request.setAttribute(
                 "dsLop",
                 classDAO.getAll()
         );
 
-        request.getRequestDispatcher("/hocvien/enroll.jsp")
+        request.getRequestDispatcher("/web/enroll.jsp")
                 .forward(request, response);
     }
 

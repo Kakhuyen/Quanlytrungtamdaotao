@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/hocvien/class-list")
+@WebServlet("/web/class-list")
 public class ClassServlet extends HttpServlet {
 
     private final ClassDAO classDAO = new ClassDAO();
@@ -50,15 +50,13 @@ public class ClassServlet extends HttpServlet {
         request.setAttribute("dsLop", dsLop);
         request.setAttribute("keyword", keyword);
 
-        request.getRequestDispatcher("/hocvien/class-list.jsp")
+        request.getRequestDispatcher("/web/class-list.jsp")
                 .forward(request, response);
     }
 
     private String normalize(String value) {
 
-        if (value == null) {
-            return "";
-        }
+        if (value == null) return "";
 
         value = value.trim();
 
