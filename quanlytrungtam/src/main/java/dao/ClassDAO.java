@@ -14,26 +14,17 @@ public class ClassDAO {
         List<Classroom> list = new ArrayList<>();
 
         String sql =
-                "SELECT maLH, tenLH, siSoMax, ngayKhaiGiang " +
-                        "FROM LOPHOC ORDER BY maLH";
+                "SELECT l.maLH, l.maKH, l.maTT, l.tenLH, l.siSoMax, l.ngayKhaiGiang, k.tenKH " +
+                        "FROM LOPHOC l " +
+                        "INNER JOIN KHOAHOC k ON l.maKH = k.maKH " +
+                        "ORDER BY l.maLH";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-
-            Classroom c = new Classroom();
-
-            c.setMaLH(rs.getInt("maLH"));
-            c.setTenLH(rs.getString("tenLH"));
-            c.setSiSoMax(rs.getInt("siSoMax"));
-            Date d = rs.getDate("ngayKhaiGiang");
-            if (d != null) {
-                c.setNgayKhaiGiang(d.toLocalDate());
-            }
-
-            list.add(c);
+        while(rs.next()){
+            list.add(mapRow(rs));
         }
 
         rs.close();

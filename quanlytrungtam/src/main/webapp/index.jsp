@@ -1,9 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    response.sendRedirect(request.getContextPath() + "/admin/courses");
-<%
-    response.sendRedirect(request.getContextPath() + "/login");
-%>
 <%--
   Created by IntelliJ IDEA.
   User: VICTUS
@@ -12,12 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.quanly.model.NguoiDung" %>
 <%@ include file="/header.jsp" %>
 
-<%
-    NguoiDung user = (NguoiDung) session.getAttribute("user");
-%>
 <style>
     .hero-section {
         background: linear-gradient(135deg, #0d6efd, #4a90ff);
@@ -100,7 +90,7 @@
 
             <div class="card intro-card border-0 shadow rounded-4 overflow-hidden">
 
-                <img src="${pageContext.request.contextPath}/images/gioithieu.jpg"
+                <img src="${pageContext.request.contextPath}/image/gioithieu.jpg"
                      alt="Trung tâm đào tạo">
 
                 <div class="card-body text-center p-4">
@@ -135,7 +125,6 @@
                 <div class="feature-icon">
                     <i class="bi bi-journal-bookmark-fill"></i>
                 </div>
-
                 <h4 class="fw-bold">
                     Chương trình đa dạng
                 </h4>
@@ -200,35 +189,12 @@
             Tham gia các lớp học để nâng cao kỹ năng và mở rộng cơ hội tương lai.
         </p>
 
-        <%
-            if (user == null) {
-        %>
 
-        <a href="<%= request.getContextPath() %>/login"
-           class="btn btn-light btn-lg fw-bold px-4">
-            Đăng nhập để đăng ký
-        </a>
-
-        <%
-        } else if (user.getVaiTro() != null &&
-                user.getVaiTro().getMaVaiTro() == 1) {
-        %>
-
-        <a href="<%= request.getContextPath() %>/admin/dashboard.jsp"
-           class="btn btn-light btn-lg fw-bold px-4">
-            Vào quản trị
-        </a>
-
-        <%
-        } else {
-        %>
-        <a href="<%= request.getContextPath() %>/hocvien/enroll"
+        <a href="<%= request.getContextPath() %>/web/enroll"
            class="btn btn-light btn-lg fw-bold px-4">
             Đăng ký lớp học
         </a>
-        <%
-            }
-        %>
+
     </div>
 </div>
 <%@ include file="/footer.jsp" %>
